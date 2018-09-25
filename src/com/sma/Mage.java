@@ -13,8 +13,8 @@ public class Mage extends Personnage {
     public void basicAttack(Personnage enemy) {
         double dommages = this.getIntelligence();
         System.out.println(this.getJoueur().infosJoueur() + " utilise Boule de Feu et inflige " + fmt(dommages) + " dommages.");
-        enemy.setVie(enemy.getVie()- dommages);
         System.out.println(enemy.getJoueur().infosJoueur() + " perd " + fmt(dommages) + " points de vie");
+        enemy.setVie(enemy.getVie()- dommages);
 
     }
 

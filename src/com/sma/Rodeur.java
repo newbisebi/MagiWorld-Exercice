@@ -13,8 +13,8 @@ public class Rodeur extends Personnage {
     public void basicAttack(Personnage enemy) {
         double dommages = this.getAgilite();
         System.out.println(getJoueur().infosJoueur() + " utilise Tir à l'Arc et inflige " + fmt(dommages) + " dommages.");
-        enemy.setVie(enemy.getVie() - dommages);
         System.out.println(enemy.getJoueur().infosJoueur() + " perd " + fmt(dommages) + " points de vie");
+        enemy.setVie(enemy.getVie() - dommages);
     }
 
     @Override

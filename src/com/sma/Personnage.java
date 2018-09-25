@@ -13,6 +13,14 @@ public abstract class Personnage {
     private int intelligence=0;
     private Joueur joueur;
 
+    public Personnage(int niveau, Joueur joueur) {
+        if (niveau <1 || niveau >100)
+            throw new IncorrectCharacteristicsException("Le niveau doit être compris entre 1 et 100");
+        else
+            this.niveau = niveau;
+        this.vie = niveau*5;
+        this.joueur = joueur;
+    }
 
     /**
      * Attaque basique créé des dommages à l'adversaire
@@ -29,14 +37,7 @@ public abstract class Personnage {
      */
     public abstract void infosPersonnage();
 
-    public Personnage(int niveau, Joueur joueur) {
-        if (niveau <1 || niveau >100)
-            throw new IncorrectCharacteristicsException("Le niveau doit être compris entre 1 et 100");
-        else
-            this.niveau = niveau;
-            this.vie = niveau*5;
-            this.joueur = joueur;
-    }
+
 
     /**
      * Prépare le message d'information correspondant à chaque personnage
