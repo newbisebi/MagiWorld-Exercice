@@ -63,6 +63,8 @@ public abstract class Personnage {
 
     public void setVie(double vie) {
         this.vie = vie;
+        if (this.vie <=0)
+            System.out.println(this.joueur.infosJoueur() + " est mort");
     }
 
     public double getForce() {
