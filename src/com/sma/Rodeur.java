@@ -19,7 +19,7 @@ public class Rodeur extends Personnage {
 
     @Override
     public void specialAttack(Personnage enemy) {
-        setSpecialAgility(getAgilite() + getNiveau() / 2, true);
+        this.setSpecialAgility(getAgilite() + getNiveau() / 2, true);
         System.out.println(this.getJoueur().infosJoueur() +" utilise Concentration et gagne "+ fmt((getNiveau()/2)) +" en agilité.");
     }
 
