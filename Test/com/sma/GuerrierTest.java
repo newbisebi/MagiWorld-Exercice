@@ -44,12 +44,18 @@ class GuerrierTest {
     public void Given_guerrierForce25_When_basicAttack_Then_enemyLose25Vitality(){
         warrior.basicAttack(enemy);
         assertEquals(225, enemy.getVie());
+        assertEquals(String.format("Joueur 2 utilise Coup d'Épée et inflige 25 dommages.%n" +
+                        "Joueur 1 perd 25 points de vie%n"), outContent.toString());
     }
     @Test
-    public void Given_guerrierForce25_When_SpecialAttack_Then_guerrierLose_7v5VitalityAndEnemyLose50Vitality(){
+    public void Given_guerrierForce25_When_SpecialAttack_Then_guerrierLose_12v5VitalityAndEnemyLose50Vitality(){
         warrior.specialAttack(enemy);
         assertEquals(200, enemy.getVie());
         assertEquals(237.5, warrior.getVie());
+        assertEquals(String.format("Joueur 2 utilise Coup de Rage et inflige 50 dommages.%n" +
+                "Joueur 1 perd 50 points de vie%n" +
+                "Joueur 2 perd 12.5 points de vie%n"), outContent.toString());
+
 
     }
 

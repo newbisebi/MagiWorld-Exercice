@@ -21,6 +21,6 @@ public class Mage extends Personnage {
 
     @Override
     public void infosPersonnage() {
-        System.out.println("Abracadabra ! Je suis le Mâge " + this.messagePersonnage());
+        System.out.println("Abracadabra ! Je suis le Mâge " + messagePersonnage());
     }
 }
