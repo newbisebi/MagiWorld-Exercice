@@ -39,18 +39,18 @@ public abstract class Personnage {
     }
 
     /**
-     * Renvoie les caractéristique du personnage dans une MAP sous un format que l'on peut
-     * utiliser dans une string (sans décimale, format string)
-     * @return une map <clé, valeur au format string>
+     * Prépare le message d'information correspondant à chaque personnage
+     * Dans chaque classe enfant, on modifie simplement le début pour adapter au type de champion
+     * @return message au format string
      */
-    public Map<String, String> formatCharacteristics (){
-        Map<String, String> characteristics = new HashMap<>();
-        characteristics.put("niveau", fmt(this.getNiveau()));
-        characteristics.put("vie", fmt(this.getVie()));
-        characteristics.put("force", fmt(this.getForce()));
-        characteristics.put("intelligence", fmt(this.getIntelligence()));
-        characteristics.put("agilite", fmt(this.getAgilite()));
-        return characteristics;
+    public String messagePersonnage (){
+        String message = joueur.infosJoueur() + " niveau " +
+                fmt(niveau) + " je possède " +
+                fmt(vie) + " de vitalité, " +
+                fmt(force) +" de force, " +
+                fmt(agilite) + " d'agilité et " +
+                fmt(intelligence) + " d'intelligence !";
+        return message;
     }
 
     public double getNiveau() {
