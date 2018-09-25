@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RodeurTest {
     Joueur joueur = new Joueur(1);
-    Rodeur rodeur = new Rodeur(40, joueur);
+    Personnage rodeur = new Rodeur(40, joueur);
     Joueur otherPlayer = new Joueur(2);
     Personnage enemy = new Guerrier(50, otherPlayer);
 

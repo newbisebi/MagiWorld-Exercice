@@ -1,5 +1,7 @@
 package com.sma;
 
+import java.util.Map;
+
 import static com.sma.FormatDouble.fmt;
 
 public class Rodeur extends Personnage {
@@ -19,13 +21,15 @@ public class Rodeur extends Personnage {
 
     @Override
     public void infosPersonnage() {
-        String niveau = fmt(this.getNiveau());//Formattage pour éviter les "50.0"
-        String vie = fmt(this.getVie());
-        String force = fmt(this.getForce());
-        int intelligence = this.getIntelligence();
-        String agilite = fmt(this.getAgilite());
+        Map<String, String> characteristics = this.formatCharacteristics();
         Joueur joueur = this.getJoueur();
-        System.out.println("Youplaboum ! Je suis le Rôdeur " + joueur.infosJoueur() + " niveau " + niveau + " je possède " + vie + " de vitalité, " + force + " de force, " + agilite + " d'agilité et " + intelligence + " d'intelligence !");
+        System.out.println("Youplaboum ! Je suis le Rôdeur " +
+                joueur.infosJoueur() + " niveau " +
+                characteristics.get("niveau") + " je possède " +
+                characteristics.get("vie") + " de vitalité, " +
+                characteristics.get("force") +" de force, " +
+                characteristics.get("agilite") + " d'agilité et " +
+                characteristics.get("intelligence") + " d'intelligence !");
     }
 
 

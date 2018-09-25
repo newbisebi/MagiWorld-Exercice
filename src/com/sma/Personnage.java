@@ -1,5 +1,10 @@
 package com.sma;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.sma.FormatDouble.fmt;
+
 public abstract class Personnage {
     private double niveau;
     private double vie;
@@ -31,6 +36,21 @@ public abstract class Personnage {
             this.niveau = niveau;
             this.vie = niveau*5;
             this.joueur = joueur;
+    }
+
+    /**
+     * Renvoie les caractéristique du personnage dans une MAP sous un format que l'on peut
+     * utiliser dans une string (sans décimale, format string)
+     * @return une map <clé, valeur au format string>
+     */
+    public Map<String, String> formatCharacteristics (){
+        Map<String, String> characteristics = new HashMap<>();
+        characteristics.put("niveau", fmt(this.getNiveau()));
+        characteristics.put("vie", fmt(this.getVie()));
+        characteristics.put("force", fmt(this.getForce()));
+        characteristics.put("intelligence", fmt(this.getIntelligence()));
+        characteristics.put("agilite", fmt(this.getAgilite()));
+        return characteristics;
     }
 
     public double getNiveau() {

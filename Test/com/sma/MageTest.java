@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MageTest {
     Joueur joueur = new Joueur(1);
-    Mage warrior = new Mage(10, joueur);
+    Personnage warrior = new Mage(10, joueur);
     Joueur otherPlayer = new Joueur(2);
     Personnage enemy = new Rodeur(100, otherPlayer);
 

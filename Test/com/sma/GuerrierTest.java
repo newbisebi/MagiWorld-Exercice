@@ -13,7 +13,7 @@ class GuerrierTest {
     Joueur joueur = new Joueur(2);
     Joueur otherPlayer = new Joueur(1);
     Personnage enemy = new Mage(50, otherPlayer);
-    Guerrier warrior = new Guerrier(50, joueur);
+    Personnage warrior = new Guerrier(50, joueur);
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
