@@ -38,6 +38,16 @@ class RodeurTest {
         assertEquals(String.format("Youplaboum ! Je suis le Rôdeur Joueur 1 niveau 40 je possède 200 de vitalité, 5 de force, 15 d'agilité et 20 d'intelligence !%n"), outContent.toString());
     }
 
+    @Test
+    public void Given_rodeurAgilite15_When_basicAttack_Then_enemyLose5Vitality(){
+        rodeur.basicAttack(enemy);
+        assertEquals(235, enemy.getVie());
+    }
+    @Test
+    public void Given_rodeurLevel40_When_SpecialAttack_Then_rodeurGains20Agilite(){
+        rodeur.specialAttack();
+        assertEquals(25, rodeur.getAgilite());
+    }
 
 
 }

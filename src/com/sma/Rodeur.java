@@ -9,11 +9,12 @@ public class Rodeur extends Personnage{
 
     @Override
     public void basicAttack(Personnage enemy) {
-
+        enemy.setVie(enemy.getVie() - this.getAgilite());
     }
 
     @Override
     public void specialAttack(Personnage enemy) {
+        this.setAgilite(this.getNiveau()/2);
 
     }
 

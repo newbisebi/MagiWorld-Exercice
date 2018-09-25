@@ -41,7 +41,7 @@ class GuerrierTest {
         assertEquals(String.format("GRRROOOOARRRRR ! Je suis le Guerrier Joueur 2 niveau 50 je possède 250 de vitalité, 25 de force, 5 d'agilité et 20 d'intelligence !%n"), outContent.toString());
     }
     @Test
-    public void Given_guerrierForce25_When_basicAttack_Then_enemyLose10Vitality(){
+    public void Given_guerrierForce25_When_basicAttack_Then_enemyLose25Vitality(){
         warrior.basicAttack(enemy);
         assertEquals(225, enemy.getVie());
     }
