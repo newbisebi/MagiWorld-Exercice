@@ -42,11 +42,14 @@ class RodeurTest {
     public void Given_rodeurAgilite15_When_basicAttack_Then_enemyLose5Vitality(){
         rodeur.basicAttack(enemy);
         assertEquals(235, enemy.getVie());
+        assertEquals(String.format("Joueur 1 utilise Tir à l'Arc et inflige 15 dommages.%n" +
+                "Joueur 2 perd 15 points de vie%n"), outContent.toString());
     }
     @Test
     public void Given_rodeurLevel40_When_SpecialAttack_Then_rodeurGains20Agilite(){
         rodeur.specialAttack(enemy);
         assertEquals(35, rodeur.getAgilite());
+        assertEquals(String.format("Joueur 1 utilise Concentration et gagne 20 en agilité.%n"), outContent.toString());
     }
 
 
