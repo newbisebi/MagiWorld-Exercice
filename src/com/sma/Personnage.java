@@ -1,10 +1,10 @@
 package com.sma;
 
 public abstract class Personnage {
-    private int niveau;
+    private double niveau;
     private double vie;
     private double force=0;
-    private int agilite=0;
+    private double agilite=0;
     private int intelligence=0;
     private Joueur joueur;
 
@@ -33,7 +33,7 @@ public abstract class Personnage {
             this.joueur = joueur;
     }
 
-    public int getNiveau() {
+    public double getNiveau() {
         return niveau;
     }
 
@@ -56,15 +56,29 @@ public abstract class Personnage {
             throw new IncorrectCharacteristicsException("Le total de vos points d'abilités ne peut pas excéder votre niveau !");
     }
 
-    public int getAgilite() {
+    public double getAgilite() {
         return agilite;
     }
 
-    public void setAgilite(int agilite) {
+    public void setAgilite(double agilite) {
         if (this.force + this.intelligence + agilite <=this.niveau)
             this.agilite = agilite;
         else
             throw new IncorrectCharacteristicsException("Le total de vos points d'abilités ne peut pas excéder votre niveau !");
+    }
+
+    /**
+     * Méthode spéciale pour le rodeur : il peut modifier son agilité au delà des quotas !
+     * C'est son super pouvoir... mais uniquement lorsqu'il utilise une super attaque
+     * @param agilite niveau d'agilité
+     * @param isRodeurSpecialAttack détermine s'il s'agit bien d'une attaque spéciale. Sinon, le quota doit être respecté
+     *                              c'est à dire agilite + force + intelligence <=niveau
+     */
+    protected void setSpecialAgility(double agilite, boolean isRodeurSpecialAttack){
+        if (isRodeurSpecialAttack)
+            this.agilite = agilite;
+        else
+            this.setAgilite(agilite);
     }
 
     public int getIntelligence() {

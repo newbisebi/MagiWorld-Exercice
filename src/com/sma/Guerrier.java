@@ -20,11 +20,11 @@ public class Guerrier extends Personnage  {
 
     @Override
     public void infosPersonnage() {
-        int niveau = this.getNiveau();
-        String vie = fmt(this.getVie()); //Formattage pour éviter les "250.0"
+        String niveau = fmt(this.getNiveau());//Formattage pour éviter les "50.0"
+        String vie = fmt(this.getVie());
         String force = fmt(this.getForce());
         int intelligence = this.getIntelligence();
-        int agilite = this.getAgilite();
+        String agilite = fmt(this.getAgilite());
         Joueur joueur = this.getJoueur();
         System.out.println("GRRROOOOARRRRR ! Je suis le Guerrier " + joueur.infosJoueur() + " niveau " + niveau + " je possède " + vie + " de vitalité, " + force +" de force, " + agilite + " d'agilité et " + intelligence + " d'intelligence !");
     }

@@ -45,8 +45,8 @@ class RodeurTest {
     }
     @Test
     public void Given_rodeurLevel40_When_SpecialAttack_Then_rodeurGains20Agilite(){
-        rodeur.specialAttack();
-        assertEquals(25, rodeur.getAgilite());
+        rodeur.specialAttack(enemy);
+        assertEquals(35, rodeur.getAgilite());
     }
 
 
