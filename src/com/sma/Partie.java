@@ -5,9 +5,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Partie {
-    // TODO créer les tests correspondants à cette partie
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Interroge l'utilisateur sur le choix du personnage et de ses caractéristiques
+     * @param joueur joueur dont c'est le tour de jouer
+     * @return une map avec les différentes caractéristiques et la valeur correspondante
+     */
     protected Map<String, Integer> askChoixPersonnage(Joueur joueur){
         Map<String, Integer> params = new HashMap<>();
 
@@ -30,7 +34,11 @@ public class Partie {
         return params;
     }
 
-
+    /**
+     * Lance la création d'un personnage en fonction des informations rentrées par le joeur
+     * @param joueur joueur dont c'est le tour
+     * @return un objet de la classe personnage (un mage, un rodeur ou bien un guerrier)
+     */
     public Personnage createPersonnage(Joueur joueur){
         // TODO Gérer les exceptions liées aux valeurs des caractéristiques
 
@@ -74,14 +82,15 @@ public class Partie {
     }
 
     /**
-     * Lancement du combat ! boucle jusqu'à ce qu'un des personnages soit mort
+     * Lancement du combat ! enchaine les tours des joueurs jusqu'à ce
+     * qu'un des personnages soit mort
      * @param perso1 personnage du joueur 1
      * @param perso2 personnage du joueur 2
      */
     public void combat(Personnage perso1, Personnage perso2){
         while (perso1.getVie()>0 && perso2.getVie()>0){
             tour(perso1, perso2);
-            if (perso1.getVie()>0 && perso2.getVie()>0)
+            if (perso1.getVie()>0 && perso2.getVie()>0) //Si le joueur 1 est mort, le tour est interrompu (joueur 2 ne joue pas)
                 tour(perso2, perso1);
         }
     }
