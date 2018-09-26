@@ -12,7 +12,6 @@ public abstract class Personnage {
     private double agilite=0;
     private int intelligence=0;
     private Joueur joueur;
-    // TODO ajouter des seuils minimums sur les caractéristiques
 
     public Personnage(int niveau, Joueur joueur) {
         if (niveau <1 || niveau >100)
