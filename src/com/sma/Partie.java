@@ -1,66 +1,159 @@
 package com.sma;
 
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.Map;
 import java.util.Scanner;
+
+import static com.sma.FormatDouble.fmt;
 
 public class Partie {
     Scanner sc = new Scanner(System.in);
 
     /**
-     * Interroge l'utilisateur sur le choix du personnage et de ses caractéristiques
-     * @param joueur joueur dont c'est le tour de jouer
-     * @return une map avec les différentes caractéristiques et la valeur correspondante
+     * Créé un personnage à partir des indications données par le joueur
+     * @param joueur joueur dont on créé le personnage
+     * @return personnage avec ses attributs
      */
-    protected Map<String, Integer> askChoixPersonnage(Joueur joueur){
-        Map<String, Integer> params = new HashMap<>();
-
+    public Personnage createPersonnage(Joueur joueur){
         System.out.println("Création du personnage du "+joueur.infosJoueur());
-        System.out.println("Veuillez choisir la classe de votre personnage (1: Guerrier, 2 : Rodeur, 3 : Mage)");
-        params.put("perso",sc.nextInt());
 
-        System.out.println("Niveau du personnage ? ");
-        params.put("niveau",sc.nextInt());
+        int classe = askClasse();
+        int niveau = askNiveau();
 
-        System.out.println("Force du personnage ? ");
-        params.put("force",sc.nextInt());
+        Personnage personnage = null;
+        switch (classe){
+            case 1:
+                personnage = new Guerrier(niveau, joueur);
+                break;
+            case 2:
+                personnage = new Rodeur(niveau, joueur);
+                break;
+            case 3:
+                personnage = new Mage(niveau, joueur);
+                break;
+        }
+        defForceAttribute(personnage);
+        defAgiliteAttribute(personnage);
+        defIntelligenceAttribute(personnage);
 
-        System.out.println("Agilité du personnage ? ");
-        params.put("agilite",sc.nextInt());
+        return personnage;
+    }
+    /**
+     * Demande à l'utilisateur de choisir une classe
+     * Vérifie que la classe est valide (1, 2 ou 3)
+     * @return classe choisie
+     */
+    private int askClasse(){
+        boolean classeCorrect = false;
+        int classe = 0;
+        while (!classeCorrect) {
+            try {
+                System.out.println("Veuillez choisir la classe de votre personnage (1: Guerrier, 2 : Rodeur, 3 : Mage)");
+                classe = sc.nextInt();
+                if (classe == 1 || classe == 2 || classe == 3) {
+                    classeCorrect = true;
+                } else {
+                    System.out.println("Veuillez choisir entre 1, 2 et 3 !");
+                }
 
-        System.out.println("Intelligence du personnage ? ");
-        params.put("intelligence",sc.nextInt());
-
-        return params;
+            } catch (InputMismatchException e) {
+                System.out.println("Veuillez choisir entre 1, 2 et 3 !");
+                sc.nextLine();
+            }
+        }
+        return classe;
+    }
+    /**
+     * Demande à l'utilisateur de choisir un niveau
+     * Vérifie que le niveau est valide (entier compris entre 1 et 100)
+     * @return niveau du personnage
+     */
+    private int askNiveau(){
+        boolean niveauCorrect = false;
+        int niveau = 0;
+        while (!niveauCorrect){
+            try {
+                System.out.println("Niveau du personnage ? ");
+                niveau = sc.nextInt();
+                if (niveau >0 && niveau <=100){
+                    niveauCorrect = true;
+                } else {
+                    System.out.println("Le niveau doit être compris entre 1 et 100");
+                }
+            } catch (InputMismatchException e){
+                System.out.println("Veuillez entrer un nombre entier !");
+                sc.nextLine();
+            }
+        }
+        return niveau;
     }
 
     /**
-     * Lance la création d'un personnage en fonction des informations rentrées par le joeur
-     * @param joueur joueur dont c'est le tour
-     * @return un objet de la classe personnage (un mage, un rodeur ou bien un guerrier)
+     * Associe au personnage la force choisir par le joueur
+     * Vérifie que la valeur entrée est cohérente
      */
-    public Personnage createPersonnage(Joueur joueur){
-        // TODO Gérer les exceptions liées aux valeurs des caractéristiques
-
-        Map<String, Integer> params = askChoixPersonnage(joueur);
-        Personnage personnage = null;
-        switch (params.get("perso")){
-            case 1:
-                personnage = new Guerrier(params.get("niveau"), joueur);
+    private void defForceAttribute(Personnage personnage) {
+        double pointsAttributs = personnage.getNiveau()
+                - personnage.getAgilite()
+                - personnage.getForce()
+                - personnage.getIntelligence();
+        while (true) {
+            try {
+                System.out.println("Force du personnage ? Vous pouvez attribuer au maximum " + fmt(pointsAttributs) + " points.");
+                personnage.setForce(sc.nextInt());
                 break;
-            case 2:
-                personnage = new Rodeur(params.get("niveau"), joueur);
-                break;
-            case 3:
-                personnage = new Mage(params.get("niveau"), joueur);
-                break;
+            } catch (IncorrectCharacteristicsException e) {
+                System.out.println(e);
+            } catch (InputMismatchException e){
+                System.out.println("Veuillez entrer un nombre entier !");
+                sc.nextLine();
+            }
         }
-        
-        personnage.setForce(params.get("force"));
-        personnage.setAgilite(params.get("agilite"));
-        personnage.setIntelligence(params.get("intelligence"));
-
-        return personnage;
+    }
+    /**
+     * Associe au personnage l'agilité choisir par le joueur
+     * Vérifie que la valeur entrée est cohérente
+     */
+    private void defAgiliteAttribute(Personnage personnage) {
+        double pointsAttributs = personnage.getNiveau()
+                - personnage.getAgilite()
+                - personnage.getForce()
+                - personnage.getIntelligence();
+        while (true) {
+            try {
+                System.out.println("Agilité du personnage ? Vous pouvez attribuer au maximum " + fmt(pointsAttributs) + " points.");
+                personnage.setAgilite(sc.nextInt());
+                break;
+            } catch (IncorrectCharacteristicsException e) {
+                System.out.println(e);
+            } catch (InputMismatchException e){
+                System.out.println("Veuillez entrer un nombre entier !");
+                sc.nextLine();
+            }
+        }
+    }
+    /**
+     * Associe au personnage l'intelligence choisir par le joueur
+     * Vérifie que la valeur entrée est cohérente
+     */
+    private void defIntelligenceAttribute(Personnage personnage) {
+        double pointsAttributs = personnage.getNiveau()
+                - personnage.getAgilite()
+                - personnage.getForce()
+                - personnage.getIntelligence();
+        while (true) {
+            try {
+                System.out.println("Intelligence du personnage ? Vous pouvez attribuer au maximum " + fmt(pointsAttributs) + " points.");
+                personnage.setIntelligence(sc.nextInt());
+                break;
+            } catch (IncorrectCharacteristicsException e) {
+                System.out.println(e);
+            } catch (InputMismatchException e){
+                System.out.println("Veuillez entrer un nombre entier !");
+                sc.nextLine();
+            }
+        }
     }
 
     /**
