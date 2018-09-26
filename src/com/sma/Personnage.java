@@ -12,6 +12,7 @@ public abstract class Personnage {
     private double agilite=0;
     private int intelligence=0;
     private Joueur joueur;
+    // TODO ajouter des seuils minimums sur les caractéristiques
 
     public Personnage(int niveau, Joueur joueur) {
         if (niveau <1 || niveau >100)
@@ -73,10 +74,12 @@ public abstract class Personnage {
     }
 
     public void setForce(double force) {
-        if (this.agilite + this.intelligence + force <=this.niveau)
-            this.force = force;
-        else
+        if (force < 0)
+            throw new IncorrectCharacteristicsException("Les caractéristiques ne peuvent pas prendre de valeurs négatives");
+        else if (this.intelligence + this.agilite + force > this.niveau)
             throw new IncorrectCharacteristicsException("Le total de vos points d'abilités ne peut pas excéder votre niveau !");
+        else
+            this.force = force;
     }
 
     public double getAgilite() {
@@ -84,10 +87,12 @@ public abstract class Personnage {
     }
 
     public void setAgilite(double agilite) {
-        if (this.force + this.intelligence + agilite <=this.niveau)
-            this.agilite = agilite;
-        else
+        if (agilite < 0)
+            throw new IncorrectCharacteristicsException("Les caractéristiques ne peuvent pas prendre de valeurs négatives");
+        else if (this.intelligence + this.force + agilite > this.niveau)
             throw new IncorrectCharacteristicsException("Le total de vos points d'abilités ne peut pas excéder votre niveau !");
+        else
+            this.agilite = agilite;
     }
 
     /**
@@ -109,10 +114,12 @@ public abstract class Personnage {
     }
 
     public void setIntelligence(int intelligence) {
-        if (this.agilite + this.force + intelligence <=this.niveau)
-            this.intelligence = intelligence;
-        else
+        if (intelligence <0)
+            throw new IncorrectCharacteristicsException("Les caractéristiques ne peuvent pas prendre de valeurs négatives");
+        else if (this.agilite + this.force + intelligence > this.niveau)
             throw new IncorrectCharacteristicsException("Le total de vos points d'abilités ne peut pas excéder votre niveau !");
+        else
+            this.intelligence = intelligence;
     }
 
     public Joueur getJoueur() {

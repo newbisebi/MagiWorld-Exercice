@@ -3,11 +3,15 @@ package com.sma;
 import java.util.Scanner;
 
 public class Partie {
-
+    // TODO créer les tests correspondants à cette partie
     Scanner sc = new Scanner(System.in);
 
 
     public Personnage createPersonnage(Joueur joueur){
+        // TODO Spliter la méthode pour réduire le nombre de lignes
+        // TODO Gérer les exceptions liées aux valeurs des caractéristiques
+
+
         System.out.println("Création du personnage du "+joueur.infosJoueur());
         System.out.println("Veuillez choisir la classe de votre personnage (1: Guerrier, 2 : Rodeur, 3 : Mage)");
         int choixPerso = sc.nextInt();
